@@ -1,0 +1,90 @@
+/* app global css */
+
+:root{
+    --bg--shipping: #ffffff;
+    --bg--cart: #EFF0F5;
+    --primary--dark: #000034;
+    --light--grey: #84849A;
+    --bg--countdown: rgba(151, 154, 184, 0.1);
+    --column-gap: 16px;
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.rebillion-style{
+
+}
+
+.rebillion-style .q-header{
+    background-color: #050824;
+    height: 80px;
+}
+
+.container{
+    margin: 0 auto;
+    max-width: 1110px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-top: 22px;
+}
+.w-50-with-gap{
+    width: calc(50% - (var(--column-gap) / 2) - 30px);
+}
+.w-100{
+    width: calc(100% - 60px);
+}
+.regestration-form {
+    width: 100%;
+}
+.regestration-form__rows{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--column-gap);
+    row-gap: 20px;
+}
+.form-input__wrapper {
+    position: relative;
+    height: 56px;
+    border: 1.5px solid #D6D8EE;
+    border-radius: 100px;
+}
+.form-input__label{
+    background-color: #fff;
+    position: absolute;
+    top: -8px;
+    left: 30px;
+    padding: 0 4px;
+    color: var(--light--grey);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+}
+.form-input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: calc(100% - 70px);
+    height: 100%;
+    padding: 16px 10px;
+    font-size: 16px;
+    margin-left: 69px;
+    line-height: 24px;
+    color: var(--light--grey);
+    font-weight: 500;
+}
+.payment__form{
+  width: 100%;
+}
+.payment__form__rows{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--column-gap);
+    row-gap: 20px;
+}
