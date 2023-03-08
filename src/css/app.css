@@ -35,10 +35,10 @@
     padding-top: 22px;
 }
 .w-50-with-gap{
-    width: calc(50% - (var(--column-gap) / 2) - 30px);
+    width: calc(50% - (var(--column-gap) / 2));
 }
 .w-100{
-    width: calc(100% - 60px);
+    width: 100%;
 }
 .regestration-form {
     width: 100%;
@@ -79,6 +79,11 @@
     color: var(--light--grey);
     font-weight: 500;
 }
+.form-input__img {
+    position: absolute;
+    left: 39px;
+    top: 18px;
+}
 .payment__form{
   width: 100%;
 }
@@ -88,3 +93,7 @@
     column-gap: var(--column-gap);
     row-gap: 20px;
 }
+
+.details{
+    margin-left: 30px;
+  }

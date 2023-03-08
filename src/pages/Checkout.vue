@@ -26,6 +26,10 @@
     padding-left: 61px;
     padding-right: 405px;
 }
+
+.shipping{
+    padding-right: 60px;
+}
 </style>
   
 <script>
