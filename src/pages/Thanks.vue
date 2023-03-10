@@ -2,27 +2,57 @@
   <div class="thank-you-page__wrapper">
     <div class="row">
       <div class="col-12 col-md-6 thanks-part">  
-        <div class="thanks__for__order">
-          <img src="../assets/like.png" alt="">
-          <div class="thanks-text">
-            <h2 class="thank-you-headling">Thank you for your order</h2>
-            <h4 class="thank-you-subheadling">Your order is confirmed</h4>
+          <div class="thanks-part-inner-wrapper">
+            <div class="thanks__for__order">
+              <img src="../assets/like.png" alt="">
+              <div class="thanks-text">
+                <h2 class="thank-you-headling">Thank you for your order</h2>
+                <h4 class="thank-you-subheadling">Your order is confirmed</h4>
+              </div>
+            </div>
+            <div class="order__id">
+              <span>Order ID: #10040</span>
+            </div>
+            <div class="btn__back-to-shop">
+              <button type="button" class="back">
+                <img src="../assets/arrow-left.svg" alt="">
+                Back to Shop
+              </button>
+            </div>
+            <div class="personal__information">
+              <div class="info">
+                  <h5 class="info-headline">Name:</h5>
+                  <span class="info-text">Oleo Bone</span>
+                </div>     
+                <div class="info">
+                  <h5 class="info-headline">Email:</h5>
+                  <span class="info-text">oleo_bone@gmail.com</span>
+                </div>
+
+                <div class="info">
+                  <h5 class="info-headline">Shipping Address:</h5>
+                  <span class="info-text">4140 Parker Rd. Allentown, New Mexico 31134</span>
+                </div>
+                <div class="info">
+                  <h5 class="info-headline">Billing Address:</h5>
+                  <span class="info-text">Same as shipping</span>
+                </div>
+
+                <div class="info">
+                  <h5 class="info-headline">Shipping:</h5>
+                  <span class="info-text">Free</span>
+                </div>
+                <div class="info">
+                  <h5 class="info-headline">Payment Method:</h5>
+                  <span class="info-text">Credit Card</span>
+                </div>
+            </div>
           </div>
         </div>
-        <div class="order__id">
-          <span>Order ID: #10040</span>
-        </div>
-        <div class="btn__back-to-shop">
-          <button type="button" class="back">
-            <img src="../assets/arrow-left.svg" alt="">
-            Back to Shop
-          </button>
-        </div>
-      </div>
       <div class="col-12 col-md-6 cart">
+
       </div>
     </div>
-
   </div>
 
 </template>
@@ -42,8 +72,15 @@
   }
   .thanks-part{
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
+    padding-right: 60px;
+  }
+  .thanks-part-inner-wrapper{
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .thanks__for__order{
     display: flex;
@@ -100,5 +137,33 @@
     gap: 6px;
     align-items: center;
     cursor: pointer;
+  }
+  .personal__information{
+    background: #FFFFFF;
+    border: 1px solid #D6D8EE;
+    border-radius: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 40px;
+    padding-right: 71px;
+    gap: 18px;
+    width: 100%;
+    margin-top: 50px;
+  }
+  .info-headline{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #4B4E68;
+  }
+  .info-text{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .info{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 </style>
