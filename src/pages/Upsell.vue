@@ -3,8 +3,9 @@
     <div class="cart-item-slider">
       <img class="cart-item-img__middle" src="../assets/sneakers_pink-bg-mid.png" alt="">
       <div class="slider-navigation">
-        <img class="btn-left" src="../assets/btn-left.svg" alt="">
-        <img class="btn-right" src="../assets/right-arrow-slider.svg" alt="">
+        <button class="btn-left" type="button"></button>
+        <button class="btn-right" type="button"></button>
+        
       </div>     
     </div>
     <div class="quantity-item__wrapper">
@@ -31,6 +32,47 @@
       <br>
       <span class="description">Mauris augue nulla proin vel a. Facilisis fringilla molestie dignissim elit orci malesuada. Lorem sit sagittis vitae nulla id. Mauris ipsum sed sed faucibus. Nulla amet metus gravida orci faucibus nisl eros arcu lorem. Nullam ornare molestie nam id gravida volutpat bibendum sem feugiat. Neque vulputate in et maecenas porta mi tellus. In massa porttitor urna quis volutpat at.</span>
     </div>
+    <div class="support__security__section">
+      <div class="secure__section">
+        <div class="secure__section-about">
+          <img src="../assets/secure-img.svg" alt="" class="secure-img">
+          <span class="secure-headline">
+          Guaranteed 
+          <a href="#" class="safe">Safe</a> & 
+          <a href="#" class="safe">Secure</a> Checkout
+          </span>
+        </div>
+    
+        <div class="payment__group-section">
+          <img src="../assets/secure-section-img-1.png" alt="">
+          <img src="../assets/secure-section-img-2.png" alt="">
+          <img src="../assets/secure-section-img-3.png" alt="">
+          <img src="../assets/secure-section-img-4.png" alt="">
+          <img src="../assets/secure-section-img-5.png" alt="">
+          <img src="../assets/secure-section-img-6.png" alt="">
+        </div>
+      </div>
+      <div class="support__section">
+        <div class="support-about">
+          <img src="../assets/support-person.svg" alt="">
+          <div class="support-text">
+            <span class="work-hours">24/7</span>
+            <span class="support-headline">Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="submit__purchase-btn">
+      <div class="submit__purchase">
+        <button class="purchase" type="button">
+          Yes, I want
+          <img src="../assets/Arrow-right.svg" alt="">
+        </button>
+      </div>
+      <div class="reject__purchase">
+        <span>No, Thanks</span>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -44,24 +86,40 @@
 
 <style scoped>
   .page__wrapper{
-    padding-top: 60px;
-    padding-right: 565px;
-    padding-left: 565px;
+    padding: 60px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 790px;
+    margin: 0 auto;
   }
-  .cart-item-img__middle{
+  .cart-item-slider{
     position: relative;
   }
   .slider-navigation{
     display: flex;
-    width: 40px;
+    width: 100%;
     height: 40px;
     position: absolute;
-    gap: 642px;
-    padding-left: 30px;
-    top: 45%;
+    padding: 0 30px;
+    top: 50%;
+    transform: translate(0,-50%);
+    justify-content: space-between;
+  }
+  .btn-left{
+    border: none;
+    background: url(../assets/btn-left.svg);
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .btn-right{
+    border: none;
+    background: url(../assets/right-arrow-slider.svg);
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
     cursor: pointer;
   }
   .quantity-item__wrapper{
@@ -163,5 +221,96 @@
     font-size: 18px;
     line-height: 28px;
     color: #4B4E68;
+  }
+  .support__security__section{
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .secure__section{
+    background: #FFFFFF;
+    border: 1px solid #DADDF5;
+    box-shadow: 0px 10px 30px rgba(22, 8, 49, 0.05);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 70px;
+  }
+.secure__section-about{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+  .payment__group-section{
+    padding-top: 30px;
+    display: flex;
+    gap: 15px;
+  }
+  .safe{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--primary--dark);
+    text-decoration: none;
+  }
+  .secure-headline{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #4B4E68;
+  }
+  .support__section{
+    background: #FFFFFF;
+    border: 1px solid #DADDF5;
+    box-shadow: 0px 10px 30px rgba(22, 8, 49, 0.05);
+    border-radius: 16px;
+  }
+  .support-about{
+    padding: 35px 52px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .support-text{
+    display: flex;
+    flex-direction: column;
+  }
+  .work-hours{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--primary--dark);
+  }
+  .support-headline{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .submit__purchase-btn{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    align-items: center;
+  }
+  .purchase{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #050824;
+    border-radius: 135.714px;
+    color: #FFFFFF;
+    padding: 22px 55px;
+    font-weight: 600;
+    font-size: 24.4286px;
+    line-height: 33px;
+    cursor: pointer;
+  }
+  .reject__purchase{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #4B4E68;
+    cursor: pointer;
   }
 </style>
