@@ -50,7 +50,7 @@
           </div>
         </div>
       <div class="col-12 col-md-6 cart-2">
-        <div class="cart-2__wrapper">
+        <div class="cart__wrapper">
           <OrderDetails/>
           <SafePaymentSSL/>
         </div>

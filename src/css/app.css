@@ -9,24 +9,16 @@
     --column-gap: 16px;
     
 }
-
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins';
 }
-
-
-.rebillion-style{
-
-}
-
 .rebillion-style .q-header{
     background-color: #050824;
     height: 80px;
 }
-
 .container{
     margin: 0 auto;
     max-width: 1110px;
@@ -35,6 +27,11 @@
     gap: 11px;
     padding-top: 22px;
 }
+.cart__wrapper{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+  }
 .w-50-with-gap{
     width: calc(50% - (var(--column-gap) / 2));
 }

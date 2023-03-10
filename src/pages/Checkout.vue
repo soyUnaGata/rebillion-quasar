@@ -149,11 +149,6 @@
   padding-left: 60px;
   padding-top: 60px;
 }
-.cart__wrapper{
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-}
 .shipping__wrapper{
   width: 540px;
   display: flex;
