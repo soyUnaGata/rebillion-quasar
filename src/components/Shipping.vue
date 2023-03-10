@@ -21,7 +21,7 @@
     <ExpressCheckout />
 
     <div class="contanct__info">
-      <p class="contact__info-text">Contact Information</p>
+      <h3 class="contact__info-text">Contact Information</h3>
 
       <div class="form-input__wrapper w-100 email__address__input">
         <div class="email__input">
@@ -34,13 +34,13 @@
 
     
     <div class="shipping__address">
-      <p class="shipping__address-text">Shipping Address</p>
+      <h3 class="shipping__address-text">Shipping Address</h3>
     </div>
 
     <AddressForm />
 
     <div class="shipping__method">
-      <p class="shipping__method-text">Shipping method</p>
+      <h3 class="shipping__method-text">Shipping method</h3>
       <div class="check-shipping__method">
         <div class="dhl-shipping-price">
           <label for="free-shipping" class="free-shipping">
@@ -62,14 +62,14 @@
     </div>
 
     <div class="payment__method">
-      <p class="payment-text">Payment Method</p>
+      <h3 class="payment-text">Payment Method</h3>
       <span>All transaction are secured and encryted</span>
     </div>
 
     <CardPaymentMethodForm />
 
     <div class="billing__address">
-      <p class="billing-text">Billing Address</p>
+      <h3 class="billing-text">Billing Address</h3>
       <span>Specify the address for your payment option</span>
 
       <div class="check-billing__address">   
@@ -211,6 +211,7 @@ h2{
   line-height: 24px;
   color: #4B4E68;
   display: flex;
+  padding-top: 20px;
 }
 .free-shipping, .dhl-shipping{
   display: flex;
@@ -240,6 +241,9 @@ h2{
 }
 .payment__method{
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .payment-text{
   font-weight: 600;

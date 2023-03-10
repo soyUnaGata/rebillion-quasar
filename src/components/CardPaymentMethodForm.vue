@@ -43,7 +43,7 @@ export default defineComponent({
 
 <style scoped>
 .card__holder-name{
-  margin-top: 25px;
+  margin-top: 30px;
 }
 .user__agreements{
   display: flex;

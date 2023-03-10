@@ -1,11 +1,7 @@
 <template>
-
   <OrderDetails/>
-
   <SafePaymentSSL/>
-
- <JewelleryClub/>
-
+  <JewelleryClub/>
 </template>
 <style scoped>
 
