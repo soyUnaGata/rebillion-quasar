@@ -12,6 +12,12 @@
         <div class="order__id">
           <span>Order ID: #10040</span>
         </div>
+        <div class="btn__back-to-shop">
+          <button type="button" class="back">
+            <img src="../assets/arrow-left.svg" alt="">
+            Back to Shop
+          </button>
+        </div>
       </div>
       <div class="col-12 col-md-6 cart">
       </div>
@@ -78,5 +84,21 @@
     line-height: 24px;
     text-align: center;
     color: #7782F1;
+  }
+  .btn__back-to-shop{
+    margin-top: 30px;
+  }
+  .back{
+    border-radius: 100px;
+    background-color: #050824;
+    padding: 16px 40px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #ffff;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
   }
 </style>
