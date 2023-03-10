@@ -56,7 +56,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: ' OrderDetails'
+  name: ' OrderDetails',
+  data (){
+    return {
+      mobile: true,
+    }
+  }
 })
 </script>
 
