@@ -79,11 +79,11 @@
               </label>
             </div>
           </div>
-
-    <AddressForm />
-
-    <button class="complete__order" disabled="disabled" type="buttom">Complete Order<img class="img__arrow" src="../assets/Arrow-right.svg" alt="submit"></button>
-</div>
+          <AddressForm />
+          <button class="complete__order" disabled="disabled" type="buttom">Complete Order
+            <img class="img__arrow" src="../assets/Arrow-right.svg" alt="submit">
+          </button>
+        </div>
       </div>
       <div class="col-12 col-md-4 cart">
         <div class="cart__wrapper">
