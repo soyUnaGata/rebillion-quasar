@@ -1,5 +1,7 @@
 <template>
-        <h1>Thank you</h1>
+  <div class="thank-you-page__wrapper">
+
+  </div>
 
 </template>
   
@@ -10,3 +12,4 @@
     name: 'PageThanks'
   })
 </script>
+
