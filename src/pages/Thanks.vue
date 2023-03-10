@@ -49,8 +49,11 @@
             </div>
           </div>
         </div>
-      <div class="col-12 col-md-6 cart">
-
+      <div class="col-12 col-md-6 cart-2">
+        <div class="cart-2__wrapper">
+          <OrderDetails/>
+          <SafePaymentSSL/>
+        </div>
       </div>
     </div>
   </div>
@@ -58,16 +61,22 @@
 </template>
   
 <script>
-  import { defineComponent } from 'vue';
+import OrderDetails from 'src/components/OrderDetails.vue';
+import SafePaymentSSL from 'src/components/SafePaymentSSL.vue'
+import { defineComponent } from 'vue';
+  
   
   export default defineComponent({
-    name: 'PageThanks'
-  })
+    name: "PageThanks",
+    components: { 
+      OrderDetails,
+      SafePaymentSSL
+    }
+})
 </script>
 
 <style scoped>
   .thank-you-page__wrapper{
-    padding-top: 60px;
     margin: 0 auto;
   }
   .thanks-part{
@@ -75,6 +84,7 @@
     align-items: flex-end;
     flex-direction: column;
     padding-right: 60px;
+    padding-top: 60px;
   }
   .thanks-part-inner-wrapper{
     width: 540px;
@@ -165,5 +175,19 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+  }
+  .cart-2{
+    background: rgba(239, 240, 245, 0.3);
+    border-left: 1px solid #EBECF3;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 60px;
+    padding-top: 60px;
+  }
+  .cart-2__wrapper{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
   }
 </style>
