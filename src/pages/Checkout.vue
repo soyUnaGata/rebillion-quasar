@@ -87,7 +87,9 @@
       </div>
       <div class="col-12 col-md-4 cart">
         <div class="cart__wrapper">
-          <Cart></Cart>
+          <OrderDetails/>
+          <SafePaymentSSL/>
+          <JewelleryClub/>
         </div>
       </div>
     </div>
@@ -96,11 +98,13 @@
   
 <script>
   import { defineComponent } from 'vue';
-  import Cart from 'components/Cart.vue';
   import CountDown from 'src/components/CountDown.vue';
   import AddressForm from 'src/components/AddressForm.vue';
   import CardPaymentMethodForm from 'src/components/CardPaymentMethodForm.vue';
   import ExpressCheckout from 'src/components/ExpressCheckout.vue';
+  import OrderDetails from 'src/components/OrderDetails.vue';
+  import SafePaymentSSL from 'src/components/SafePaymentSSL.vue';
+  import JewelleryClub from 'src/components/JewelleryClub.vue'
   
   export default defineComponent({
     name: 'PageCheckout',
@@ -109,7 +113,9 @@
         CountDown,
         AddressForm,
         CardPaymentMethodForm,
-        Cart,
+        OrderDetails, 
+        SafePaymentSSL, 
+        JewelleryClub
     },
   })
 </script> 
