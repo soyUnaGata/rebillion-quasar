@@ -40,16 +40,8 @@
             <h3 class="shipping__method-text">Shipping method</h3>
             <div class="check-shipping__method">
               <div class="dhl-shipping-price">
-                <label for="free-shipping" class="free-shipping">
-                  <input type="radio" name="shipping" id="free-shipping" style="display: none;">
-                  <span class="free-shipping-radio-fake"></span>
-                  <span class="free-shipping-text">Free shipping</span>
-                </label>
-                <label class="dhl-shipping" for="dhl-shipping">
-                    <input type="radio" name="shipping" id="dhl-shipping" style="display: none;">
-                    <span class="dhl-shipping-radio-fake"></span>
-                    <span class="dhl-shipping-text">DHL with price</span>
-                </label>
+                <RadioButton v-model="shippingPrice" radio-id="free-shipping" group-name="shipping-method" value="1" label="Free shipping"/>
+                <RadioButton v-model="shippingPrice" radio-id="dhl-shipping" group-name="shipping-method" value="2" label="DHL with price"/>
               </div>    
               <div class="shipping__cost">
                   <span class="shipping__method-price">$0</span>
@@ -67,16 +59,8 @@
             <span>Specify the address for your payment option</span>
 
             <div class="check-billing__address">   
-              <label for="same-shipping" class="same-shipping">
-                <input type="radio" name="billing" id="same-shipping" style="display: none;">
-                <span class="same-shipping-radio-fake"></span>
-                <span class="same-shipping-text">Same as shipping address</span>
-              </label>  
-              <label for="other-shipping" class="other-shipping">
-                <input type="radio" name="billing" id="other-shipping" style="display: none;">
-                <span class="other-shipping-radio-fake"></span>
-                <span class="other-shipping-text">Use a different billing address</span>
-              </label>
+              <RadioButton v-model="billingAddress" radio-id="same-shipping" group-name="billing-address" value="1" label="Same as shipping address"/>
+              <RadioButton v-model="billingAddress" radio-id="diff-shipping" group-name="billing-address" value="2" label="Use a different billing address"/>
             </div>
           </div>
           <AddressForm />
@@ -87,9 +71,27 @@
       </div>
       <div class="col-12 col-md-4 cart">
         <div class="cart__wrapper">
-          <OrderDetails/>
-          <SafePaymentSSL/>
-          <JewelleryClub/>
+          <button class="show__order-mobile" @click="toggleButton">
+            <div class="show__order">
+              <img src="../assets/i-shopping-cart.svg" alt="">
+              Show order summary
+              <img src="../assets/arrow-small-down.svg" alt="">
+            </div>
+            <div class="summary">
+              <span class="total__sum-sum">$362.70</span>
+            </div>
+          </button>
+          <div v-if="showOrder" class="order-wrapper">
+            <OrderDetails/>
+          </div>
+          <div v-else>
+            <div v-show="!showCart">
+            <SafePaymentSSL/>
+ 
+            </div>
+            <JewelleryClub/>
+          </div>
+        
         </div>
       </div>
     </div>
@@ -105,7 +107,8 @@
   import OrderDetails from 'src/components/OrderDetails.vue';
   import SafePaymentSSL from 'src/components/SafePaymentSSL.vue';
   import JewelleryClub from 'src/components/JewelleryClub.vue'
-  
+  import RadioButton from 'src/components/RadioButton.vue'
+
   export default defineComponent({
     name: 'PageCheckout',
 
@@ -115,8 +118,23 @@
         CardPaymentMethodForm,
         OrderDetails, 
         SafePaymentSSL, 
-        JewelleryClub
+        JewelleryClub,
+        RadioButton
     },
+    data (){
+    return {
+        showOrder: true,
+        showCart: true ,
+        shippingPrice: 1,
+        billingAddress: 1
+      }
+    },
+    methods: {
+    toggleButton() {
+      this.showOrder = !this.showOrder
+      this.showCart = !this.showCart
+    }
+  }
   })
 </script> 
 
@@ -136,6 +154,39 @@
     width: 898px;
     background-color: var(--bg--cart);
 }
+.show__order-mobile{
+  display: flex;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid #D6D8EE;
+  border-radius: 20px;
+}
+.order-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.order-wrapper.show {
+  max-height: 500px;
+}
+.show__order{
+  padding: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.summary{
+  padding: 24px;
+  align-items: center;
+  display: flex;
+}
+.cart__contents-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
 .shipping{
   display: flex;
   align-items: flex-end;
@@ -154,7 +205,7 @@
   display: flex;
   flex-direction: column;
 }
-.free-shipping-radio-fake, .dhl-shipping-radio-fake, .same-shipping-radio-fake, .other-shipping-radio-fake{
+.checkout-radio-fake {
   border: 1px solid #D6D8EE;
   height: 24px;
   width: 24px;
@@ -163,31 +214,7 @@
   align-items: center;
   justify-content: center;
 }
-.free-shipping input[type="radio"]:checked + .free-shipping-radio-fake::after{
-  content: '';
-  display: flex;
-  height: 12px;
-  width: 12px; 
-  background-color: #4B4E68;
-  border-radius: 50%;
-}
-.dhl-shipping input[type="radio"]:checked + .dhl-shipping-radio-fake::after{
-  content: '';
-  display: flex;
-  height: 12px;
-  width: 12px; 
-  background-color: #4B4E68;
-  border-radius: 50%;
-}
-.same-shipping input[type="radio"]:checked + .same-shipping-radio-fake::after{
-  content: '';
-  display: flex;
-  height: 12px;
-  width: 12px; 
-  background-color: #4B4E68;
-  border-radius: 50%;
-}
-.other-shipping input[type="radio"]:checked + .other-shipping-radio-fake::after{
+.checkout-radio input[type="radio"]:checked + .checkout-radio-fake::after{
   content: '';
   display: flex;
   height: 12px;
@@ -260,10 +287,13 @@ h2{
   display: flex;
   padding-top: 20px;
 }
-.free-shipping, .dhl-shipping{
+.checkout-radio {
   display: flex;
   gap: 10px;
-  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4B4E68;
   cursor: pointer;
 }
 .shipping__method-price{
@@ -324,15 +354,6 @@ h2{
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;
-}
-.same-shipping,.other-shipping{
-  display: flex;
-  gap: 10px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  color: #4B4E68;
-  cursor: pointer;
 }
 .complete__order{
   display: flex;

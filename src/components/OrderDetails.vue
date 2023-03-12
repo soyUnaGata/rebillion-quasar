@@ -32,7 +32,7 @@
             <span class="cart-item-price">$120.90</span>
         </div>
         </div>
-  </div>
+    </div>
 
     <div class="subtotal__sum-and-shipping">
         <div class="subtotal__sum">
@@ -50,6 +50,7 @@
     <span class="total__sum-text">Total</span>
     <span class="total__sum-sum">$362.70</span>
   </div>
+
 </template>
 
 <script>
@@ -57,21 +58,12 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: ' OrderDetails',
-  data (){
-    return {
-      mobile: true,
-    }
-  }
 })
 </script>
 
 <style scoped>
-.cart__contents-section{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-}
+
+
 .cart__contents-section::after{
   content: '';
   height: 1px;
