@@ -88,6 +88,7 @@ import { defineComponent } from 'vue';
   }
   .thanks-part-inner-wrapper{
     width: 540px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -187,6 +188,7 @@ import { defineComponent } from 'vue';
   }
   .cart-2__wrapper{
     width: 450px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
   }

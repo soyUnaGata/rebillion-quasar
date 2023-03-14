@@ -30,16 +30,14 @@ export default defineComponent({
 
 <style scoped>
 .jewellery__club-about{
-  width: 449px;
-  height: 245px;
+  max-width: 100%;
   background: #FFFFFF;
   border: 1px solid #D6D8EA;
   border-radius: 32px;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
-  padding-left: 30px;
-  padding-top: 30px;
+  padding: 30px;
 }
 .jewellery__club-headline{
   font-weight: 600;

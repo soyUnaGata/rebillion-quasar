@@ -1,7 +1,7 @@
 <template>
    <div class="checkout__wrapper">
     <div class="row h-100">
-      <div class="col-12 col-md-8 shipping">
+      <div class="shipping col-12 col-md-6">
         <div class="shipping__wrapper">
           <div class="breadcrumbs__h1">
           <div class="path__cart">
@@ -31,6 +31,8 @@
                 <input class="form-input" type="email" name="email" id="">
               </div>
             </div>
+            <EmailFormInput v-model="email"/>
+            <PhoneFormInput/>
           </div>
           <div class="shipping__address">
             <h3 class="shipping__address-text">Shipping Address</h3>
@@ -69,29 +71,9 @@
           </button>
         </div>
       </div>
-      <div class="col-12 col-md-4 cart">
+      <div class="col-12 col-md-6 cart">
         <div class="cart__wrapper">
-          <button class="show__order-mobile" @click="toggleButton">
-            <div class="show__order">
-              <img src="../assets/i-shopping-cart.svg" alt="">
-              Show order summary
-              <img src="../assets/arrow-small-down.svg" alt="">
-            </div>
-            <div class="summary">
-              <span class="total__sum-sum">$362.70</span>
-            </div>
-          </button>
-          <div v-if="showOrder" class="order-wrapper">
-            <OrderDetails/>
-          </div>
-          <div v-else>
-            <div v-show="!showCart">
-            <SafePaymentSSL/>
- 
-            </div>
-            <JewelleryClub/>
-          </div>
-        
+          <OrderDetailsCollapseable />
         </div>
       </div>
     </div>
@@ -108,31 +90,43 @@
   import SafePaymentSSL from 'src/components/SafePaymentSSL.vue';
   import JewelleryClub from 'src/components/JewelleryClub.vue'
   import RadioButton from 'src/components/RadioButton.vue'
+  import EmailFormInput from 'src/components/EmailFormInput.vue'
+  import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
+  import PhoneFormInput from 'src/components/PhoneFormInput.vue';
 
   export default defineComponent({
     name: 'PageCheckout',
-
     components: {
-        CountDown,
-        AddressForm,
-        CardPaymentMethodForm,
-        OrderDetails, 
-        SafePaymentSSL, 
-        JewelleryClub,
-        RadioButton
-    },
+    CountDown,
+    ExpressCheckout,
+    AddressForm,
+    CardPaymentMethodForm,
+    OrderDetails,
+    SafePaymentSSL,
+    JewelleryClub,
+    RadioButton,
+    EmailFormInput,
+    OrderDetailsCollapseable,
+    PhoneFormInput
+},
     data (){
     return {
-        showOrder: true,
-        showCart: true ,
+        mobile: false,
+        showOrder: false,
+        showCart: true,
         shippingPrice: 1,
-        billingAddress: 1
+        billingAddress: 1,
+        email: ''
       }
     },
     methods: {
     toggleButton() {
       this.showOrder = !this.showOrder
-      this.showCart = !this.showCart
+      this.showCart = !this.showCart;
+      this.mobile = true;
+    },
+    created(){
+      this.$on('update:modelValue', (data) => { shippingPrice = data; })
     }
   }
   })
@@ -145,15 +139,6 @@
 .h-100 {
     height: 100vh;
 }
-.row > .col-md-8 {
-    width: 1005px;
-    background-color: var(--bg--shipping);
-
-} 
-.row > .col-md-4 {
-    width: 898px;
-    background-color: var(--bg--cart);
-}
 .show__order-mobile{
   display: flex;
   justify-content: space-between;
@@ -164,10 +149,10 @@
 .order-wrapper {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  transition:  0.5s ease-in-out;
 }
 
-.order-wrapper.show {
+.order-wrapper:focus {
   max-height: 500px;
 }
 .show__order{
@@ -192,6 +177,7 @@
   align-items: flex-end;
   flex-direction: column;
   padding-right: 60px;
+  background-color: var(--bg--shipping);
 }
 .cart{
   display: flex;
@@ -199,9 +185,11 @@
   flex-direction: column;
   padding-left: 60px;
   padding-top: 60px;
+  background-color: var(--bg--cart);
 }
 .shipping__wrapper{
   width: 540px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -371,8 +359,79 @@ h2{
   align-items: center;
   margin-top: 50px;
   width: 257px;
+  max-width: 100%;
 }
 .complete__order:disabled{
   background-color: rgba(5, 8, 36, 0.3);
 }
+</style>
+
+<style>
+  @media screen and (max-width: 576px) {
+    .shipping{
+      padding: 30px 16px;
+      max-width: 100%;
+      gap: 30px;
+      display: flex;
+    }
+    .cart{
+      padding: 0px;
+      background-color: var(--bg--shipping);
+    }
+    .w-50-with-gap{
+      width: 100%;
+    }
+    .countdown{
+      padding: 20px 16px;
+      max-width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .countdown-text{
+      text-align: center;
+    }
+    .countdown-hms{
+      padding: 16px;
+      margin: 0;
+    }
+    .email__address__input {
+      margin-top: 20px;
+    }
+    .shipping__address {
+      margin-top: 30px;
+    }
+    .about__person{
+      margin-top: 20px;
+    }
+    .shipping__method{
+      margin-top: 20px;
+    }
+    .payment__method{
+      margin-top: 30px;
+    }
+    .billing__address{
+      margin-top: 30px;
+    }
+    .complete__order{
+      margin-top: 30px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .cart__wrapper{
+      background-color: #ffff;
+    }
+    .cart__contents-section--wrapper{
+      margin-top: 8px;
+      padding: 20px 16px;
+      background-color: var(--bg--cart);
+      border-top: 1px solid #EBECF3;
+      border-radius: 20px;
+    }
+    .jewellery__club-about{
+      padding: 20px 16px;
+    }
+
+  }
 </style>

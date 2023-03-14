@@ -32,6 +32,7 @@ export default defineComponent({
   border: 1px solid #D6D8EE;
   border-radius: 32px;
   margin-top: 30px;
+  max-width: 100%;
 }
 .express__checkout-text{
   font-weight: 600;
@@ -45,6 +46,7 @@ export default defineComponent({
 }
 .shop__pay,.pay__pal,.gpay{
   width: 147px;
+  max-width: 100%;
   height: 50px;
   cursor: pointer;
 }

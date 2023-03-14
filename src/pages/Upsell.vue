@@ -130,6 +130,7 @@
     border-radius: 16px;
     height: 225px;
     width: 790px;
+    max-width: 100%;
   }
   .price__and__discount{
     padding-top: 40px;

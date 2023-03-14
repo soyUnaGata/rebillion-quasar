@@ -7,9 +7,9 @@
     <div class="countdown-hms">
       <p class="hms hours">00</p>
       <p class="divide-dots">:</p>
-      <p class="hms minutes">09</p>
-      <p class="divide-dots">:</p>
-      <p class="hms seconds">39</p>
+      <p class="hms minutes">{{ minutes.toString().padStart(2, '0') }}</p>
+      <p class="divide-dots separator">:</p>
+      <p class="hms seconds" :class="{'blink': blink}">{{ seconds.toString().padStart(2, '0') }}</p>
     </div>
   </div>
 </template>
@@ -18,17 +18,53 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'CountDown'  
-})
+  name: 'CountDown',
+  data(){
+    return {
+      minutes: 10,
+      seconds: 0,
+      timer: null,
+      blink: false
+    }
+  },
+  created() {
+    this.timer = setInterval(() => {
+      if (this.seconds > 0) {
+        this.seconds--;
+      } else {
+        if (this.minutes > 0) {
+          this.minutes--;
+          this.seconds = 59;
+        } else {
+          clearInterval(this.timer);
+          alert('Time is up!');
+        }
+      }
+      this.blink = !this.blink;
+    }, 1000);
+  }
+});
 </script>
 
-<style scoped>
+<style>
+.separator {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 .countdown{
   margin-top: 50px;
   background-color: var(--bg--countdown);
   border-radius: 32px;
   width: 540px;
-  height: 139px;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-width: 100%;
   color: var(--primary--dark);
 }
 .countdown-text{
@@ -50,6 +86,7 @@ export default defineComponent({
   margin-left: 30px;
   align-items: center;
   width: 180px;
+  max-width: 100%;
 }
 .hms{
   width: 46px;
