@@ -173,6 +173,14 @@ export default defineComponent({
   line-height: 26px;
   color: var(--primary--dark);
 }
+.show__order-mobile{
+  display: flex;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid #D6D8EE;
+  border-radius: 20px;
+  width: 100%;
+}
 </style>
 
 <style>
