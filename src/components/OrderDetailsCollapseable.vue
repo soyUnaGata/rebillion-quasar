@@ -72,11 +72,11 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { useQuasar } from 'quasar'
-import { Platform } from 'quasar'
+import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
+import { Platform } from 'quasar';
 import SafePaymentSSL from 'src/components/SafePaymentSSL.vue';
-import JewelleryClub from 'src/components/JewelleryClub.vue'
+import JewelleryClub from 'src/components/JewelleryClub.vue';
 
 export default defineComponent({
   name: ' OrderDetails',
