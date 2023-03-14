@@ -1,32 +1,26 @@
 <template>
-    <q-btn-dropdown push>
-       <template v-slot:label>
-        <div class="country-dropdown">
-            <img class="country-dropdown-img" :src="selected.icon" alt="">
-            <span v-text="selected.phoneCode"></span>
-            <img class="country-dropdown-img country-dropdown-arrow" src="../assets/arrow-small-down.svg" />
+    <div class="country-dropdown">
+        <button v-if="currentValue" type="button" class="country-dropdow-btn" @click.stop="show = !show">
+            <img class="country-dropdown-img" :src="currentValue.icon" alt="">
+            <span v-text="currentValue.phoneCode"></span>
+            <img class="country-dropdown-img country-dropdown-arrow" v-if="show" src="../assets/arrow-small-up.svg" />
+            <img class="country-dropdown-img country-dropdown-arrow" v-else src="../assets/arrow-small-down.svg" />
+        </button>
+        <div v-else class="country-dropdow-btn" @click.stop="show = !show">
+            <div style="width: 20px;"></div>
+            <div style="width: 20px;"></div>
+            <img class="country-dropdown-img country-dropdown-arrow" v-if="show" src="../assets/arrow-small-up.svg" />
+            <img class="country-dropdown-img country-dropdown-arrow" v-else src="../assets/arrow-small-down.svg" />
         </div>
-      </template>
-      <q-list>  
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Photos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Videos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Articles</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
+        <Transition>
+            <div class="country-dropdown-menu" v-if="show">
+                <div class="country-dropdown-item" v-for="option in formatedOptions" @click.stop="select(option)">
+                    <img class="country-dropdown-img" :src="option.icon" alt="">
+                    <span v-text="option.phoneCode"></span>
+                </div>
+            </div>
+        </Transition>
+    </div>
 </template>
 
 <script>
@@ -43,7 +37,7 @@
         name: 'PhoneCountryCodeSelect',
         data(){
             return {
-                codes: [
+                options: [
                     { countryCode: "US", phoneCode: "+1" },
                     { countryCode: "CA", phoneCode: "+1" },
                     { countryCode: "MX", phoneCode: "+52" },
@@ -67,12 +61,12 @@
                     { countryCode: "TW", phoneCode: "+886" },
                     { countryCode: "VN", phoneCode: "+84" },
                 ],
-                selected: null
+                show: false
             }
         },
         computed:{
-            codesWithImages() {
-                return this.codes.map(code => (Object.assign({}, code, { icon: `/img/flags/${code.countryCode}.svg` })))
+            formatedOptions() {
+                return this.options.map(option => (Object.assign({}, option, { icon: `/img/flags/${option.countryCode}.svg` })))
             },
             currentValue: {
                 get(){
@@ -83,19 +77,41 @@
                 }
             }
         },
-        created(){
-            this.selected = this.codesWithImages[0];
+        methods:{
+            select(option){
+                this.currentValue = option;
+                this.show = false;
+            },
+            hide(){
+                this.show = false;
+            }
+        },
+        mounted(){
+            window.addEventListener('click', this.hide)
+        },
+        unmounted(){
+            window.removeEventListener('click', this.hide);
         }
     })
 </script>
 
 <style scoped>
-    .country-dropdown{
+    .country-dropdow{
+        position: relative;
+    }
+
+    .country-dropdow-btn{
         padding: 15px 16px;
         display: flex;
         gap: 10px;
         background-color: var(--bg--cart);
         border-radius: 100px 0px 0px 100px;
+        outline: none;
+        border: none;
+    }
+    .country-dropdow-btn--empty{
+        width: 127px;
+        height: 50px;
     }
     .country-dropdown-img{
         height: 20px;
@@ -106,37 +122,19 @@
         padding: 15px 16px;
         display: flex;
         gap: 10px;    
+        background-color: var(--bg--shipping);
+        cursor: pointer;
     }
-    body.desktop .q-focusable:focus > .q-focus-helper, body.desktop .q-manual-focusable--focused > .q-focus-helper, body.desktop .q-hoverable:hover > .q-focus-helper {
-        background: none;
-        opacity: 0.15; 
+
+    .country-dropdown-menu{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        background-color: var(--bg--shipping);
+        z-index: 99;
+        max-height: 200px;
+        overflow: auto;
     }
-    body.desktop .q-focus-helper:before {
-        background: none;
-    }
-    .q-btn-dropdown--simple * + .q-btn-dropdown__arrow {
-        margin-left: none;
-        display: none;
-    }
-    .q-btn--push {
-        border-radius: none;
-    }
-    .q-btn--push {
-        border-radius: 100px 0px 0px 100px;
-        border: none;
-    }
-    .q-btn{
-        padding: none;
-    }
-    .q-btn:before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: none;
-    box-shadow: none;
-}
 </style>

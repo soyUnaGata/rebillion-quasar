@@ -95,5 +95,20 @@
 
 .details{
     margin-left: 30px;
-  }
+}
+
+@media screen and (max-width: 576px) {
+    .container{
+        margin: 0 auto;
+        max-width: 576px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px 16px;
+    }
+    .rebillion-style .q-header{
+        height: 60px;
+    }
+}
+
   

@@ -32,7 +32,7 @@ export default defineComponent({
   background: #FFFFFF;
   border: 1px solid #D6D8EA;
   border-radius: 32px;
-  height: 101px;
+  max-height: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;

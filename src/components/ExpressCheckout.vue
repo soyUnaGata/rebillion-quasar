@@ -28,7 +28,7 @@ export default defineComponent({
 .express__checkout{
   padding: 30px;
   width: 540px;
-  height: 160px;
+  max-height: 100%;
   border: 1px solid #D6D8EE;
   border-radius: 32px;
   margin-top: 30px;

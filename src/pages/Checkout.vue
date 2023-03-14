@@ -32,7 +32,7 @@
               </div>
             </div>
             <EmailFormInput v-model="email"/>
-            <PhoneFormInput/>
+            <PhoneFormInput />
           </div>
           <div class="shipping__address">
             <h3 class="shipping__address-text">Shipping Address</h3>
@@ -120,11 +120,6 @@
       }
     },
     methods: {
-    toggleButton() {
-      this.showOrder = !this.showOrder
-      this.showCart = !this.showCart;
-      this.mobile = true;
-    },
     created(){
       this.$on('update:modelValue', (data) => { shippingPrice = data; })
     }
@@ -381,8 +376,11 @@ h2{
     .w-50-with-gap{
       width: 100%;
     }
+    .breadcrumbs__h1{
+      margin-top: 30px;
+    }
     .countdown{
-      padding: 20px 16px;
+      padding: 16px;
       max-width: 100%;
       align-items: center;
       display: flex;
@@ -395,8 +393,17 @@ h2{
       padding: 16px;
       margin: 0;
     }
+    .express__checkout{
+      max-height: 100%;
+    }
+    .payment_type{
+      flex-wrap: wrap;
+    }
     .email__address__input {
       margin-top: 20px;
+    }
+    .form-input--phone{
+      padding-left: 10px;
     }
     .shipping__address {
       margin-top: 30px;

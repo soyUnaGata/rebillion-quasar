@@ -1,9 +1,9 @@
 <template>
   <div class="countdown">
-    <p class="countdown-text"> 🔥 Your cart is reserved for 
+    <h4 class="countdown-text"> 🔥 Your cart is reserved for 
       <span>10:00</span> 
       minutes
-    </p>
+    </h4>
     <div class="countdown-hms">
       <p class="hms hours">00</p>
       <p class="divide-dots">:</p>
@@ -61,16 +61,12 @@ export default defineComponent({
   background-color: var(--bg--countdown);
   border-radius: 32px;
   width: 540px;
-  padding-left: 30px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px;
   max-width: 100%;
   color: var(--primary--dark);
 }
 .countdown-text{
   font-style: normal;
-  padding-top: 30px;
-  padding-left: 30px;
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
@@ -83,7 +79,6 @@ export default defineComponent({
   margin-top: 15px;
   display: flex;
   gap: 8px;
-  margin-left: 30px;
   align-items: center;
   width: 180px;
   max-width: 100%;
