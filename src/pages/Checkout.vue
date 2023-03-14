@@ -19,6 +19,9 @@
             <q-breadcrumbs-el label="Shipping & Billing" class="breadcrumbs__cart"/>
           </q-breadcrumbs>
           </div>
+            <div class="isMobile" >
+              <OrderDetailsCollapseable v-if="isTableOrMobile" />
+            </div>
           <CountDown />
           <ExpressCheckout />
           <div class="contanct__info">
@@ -73,7 +76,7 @@
       </div>
       <div class="col-12 col-md-6 cart">
         <div class="cart__wrapper">
-          <OrderDetailsCollapseable />
+          <OrderDetailsCollapseable v-if="isDesktop"/>
         </div>
       </div>
     </div>
@@ -82,6 +85,7 @@
   
 <script>
   import { defineComponent } from 'vue';
+  import { useQuasar } from 'quasar';
   import CountDown from 'src/components/CountDown.vue';
   import AddressForm from 'src/components/AddressForm.vue';
   import CardPaymentMethodForm from 'src/components/CardPaymentMethodForm.vue';
@@ -119,11 +123,23 @@
         email: ''
       }
     },
+    computed: {
+      isDesktop(){
+        return this.$platform.is.desktop;
+      },
+      isTableOrMobile(){
+        return this.$platform.is.tablet || this.$platform.is.mobile;
+      }
+    },
     methods: {
     created(){
       this.$on('update:modelValue', (data) => { shippingPrice = data; })
     }
-  }
+  },
+     created(){
+      const $q = useQuasar()
+      this.$platform = $q.platform;
+    }
   })
 </script> 
 
@@ -133,13 +149,6 @@
 }
 .h-100 {
     height: 100vh;
-}
-.show__order-mobile{
-  display: flex;
-  justify-content: space-between;
-  background: #FFFFFF;
-  border: 1px solid #D6D8EE;
-  border-radius: 20px;
 }
 .order-wrapper {
   max-height: 0;
@@ -368,6 +377,9 @@ h2{
       max-width: 100%;
       gap: 30px;
       display: flex;
+    }
+    .isMobile {
+      margin-top: 30px;
     }
     .cart{
       padding: 0px;
