@@ -91,17 +91,4 @@ export default defineComponent({
 }
 
 
-.form-error-message{
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  /* identical to box height */
-
-
-  /* Status/danger */
-
-  color: #F53D6B;
-}
-
 </style>

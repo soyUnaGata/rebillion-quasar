@@ -27,12 +27,13 @@
           <div class="contanct__info">
             <h3 class="contact__info-text">Contact Information</h3>
 
-            <div class="form-input__wrapper w-100 email__address__input">
+            <div class="form-input__wrapper w-100 email__address__input" :class="{ 'form-control--invalid': v$?.checkout.email.$invalid }">
               <div class="email__input">
                 <label class="form-input__label email-text">Email Address</label>
                 <img class="form-input__img" src="../assets/mail-icon.svg" alt="">
                 <input class="form-input" type="email" name="email" v-model="checkout.email">
               </div>
+              <span class="form-error-message">Enter a email address</span>
             </div>
             <PhoneFormInput v-model="checkout.phone"/>
           </div>
@@ -97,72 +98,87 @@
   import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
   import PhoneFormInput from 'src/components/PhoneFormInput.vue';
 
+  import { useVuelidate } from '@vuelidate/core'
+  import { email, required } from '@vuelidate/validators'
+
   export default defineComponent({
     name: 'PageCheckout',
     components: {
-      CountDown,
-      ExpressCheckout,
-      AddressForm,
-      CardPaymentMethodForm,
-      OrderDetails,
-      SafePaymentSSL,
-      JewelleryClub,
-      RadioButton,
-      OrderDetailsCollapseable,
-      PhoneFormInput
-  },
-    data (){
-    return {
-        mobile: false,
-        showOrder: false,
-        showCart: true,
-        email: '',
-        checkout: {
-          email: '',
-          phoneNumber: '',
-          shippingAddress: {
-            countryId: null,
-            firstName: '',
-            lastName: '',
-            address: '',
-            city: '',
-            postalCode: ''
-          },
-          shippingMethod: 1,
-          paymentMethod: {
-            cardNumber: '',
-            cardHolder: '',
-            expired: '',
-            cvv: '',
-            agree: false
-          },
-          billingAddressType: 1,
-          billingAddress: {
-            countryId: null,
-            firstName: '',
-            lastName: '',
-            city: '',
-            postalCode: ''
-          }
+        CountDown,
+        ExpressCheckout,
+        AddressForm,
+        CardPaymentMethodForm,
+        OrderDetails,
+        SafePaymentSSL,
+        JewelleryClub,
+        RadioButton,
+        OrderDetailsCollapseable,
+        PhoneFormInput
+    },
+    setup: () => ({ v$: useVuelidate() }),
+    data() {
+        return {
+            mobile: false,
+            showOrder: false,
+            showCart: true,
+            checkout: {
+                email: '',
+                phoneNumber: '',
+                shippingAddress: {
+                    countryId: null,
+                    firstName: '',
+                    lastName: '',
+                    address: '',
+                    city: '',
+                    postalCode: ''
+                },
+                shippingMethod: 1,
+                paymentMethod: {
+                    cardNumber: '',
+                    cardHolder: '',
+                    expired: '',
+                    cvv: '',
+                    agree: false
+                },
+                billingAddressType: 1,
+                billingAddress: {
+                    countryId: null,
+                    firstName: '',
+                    lastName: '',
+                    city: '',
+                    postalCode: ''
+                }
+            }
         }
-      }
+    },
+    validations: {
+        checkout: {
+            email: {
+                required,
+                email
+            }
+        }
     },
     computed: {
-      isDesktop(){
-        return this.$platform.is.desktop;
-      },
-      isTableOrMobile(){
-        return this.$platform.is.tablet || this.$platform.is.mobile;
-      },
-      countries() {
-        return Constants.countries.map((c, i) => ({ id: i, name: c }));
-      }
+        isDesktop() {
+            return this.$platform.is.desktop;
+        },
+        isTableOrMobile() {
+            return this.$platform.is.tablet || this.$platform.is.mobile;
+        },
+        countries() {
+            return Constants.countries.map((c, i) => ({
+                id: i,
+                name: c
+            }));
+        }
     },
-     created(){
-      const $q = useQuasar()
-      this.$platform = $q.platform;
+    created() {
+        const $q = useQuasar()
+        this.$platform = $q.platform;
     }
   })
+
 </script> 
 
 <style>
