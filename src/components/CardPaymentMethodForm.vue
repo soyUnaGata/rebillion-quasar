@@ -3,26 +3,26 @@
       <div class="payment__form__rows">
         <div class="form-input__wrapper w-100">
           <label class="form-input__label" for="card">Card Number</label>
-          <input class="form-input" type="text" name="card" id="card">
+          <input class="form-input" type="text" name="card" id="card" v-model="modelValue.cardNumber">
           <img  class="form-input__img" src="../assets/payment.svg" alt="card">
         </div>
 
         <div class="form-input__wrapper w-100">
-          <input class="form-input" type="text" name="card-holder" id="card-holder" placeholder="Name on Card">
+          <input class="form-input" type="text" name="card-holder" id="card-holder" placeholder="Name on Card" v-model="modelValue.cardHolder">
           <img class="form-input__img" src="../assets/user.svg" alt="user">
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
-          <input class="form-input details" type="text" name="card-date" id="card-date" placeholder="MM/YY">
+          <input class="form-input details" type="text" name="card-date" id="card-date" placeholder="MM/YY" v-model="modelValue.expired">
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
-            <input class="form-input details" type="text" name="cvv" id="cvv" placeholder="CVV">
+            <input class="form-input details" type="text" name="cvv" id="cvv" placeholder="CVV" v-model="modelValue.cvv">
         </div>
       </div>
 
         <div class="user__agreements">
-          <input type="checkbox" name="agreements" id="agreements" class="agreements">
+          <input type="checkbox" name="agreements" id="agreements" class="agreements" v-model="modelValue.agree">
           <label for="checkbox" class="user__agreements-text">By checking this box, I acknowledge that I have read and agree to the 
             <a href="" class="link-terms-policy">Terms of Service</a> and, 
             <a href="" class="link-terms-policy">Monthly Billing Terms </a> 
@@ -35,9 +35,21 @@
 <script>
 import { defineComponent } from 'vue'
 
+
 export default defineComponent({
   name: 'CardPaymentMethodForm',
-  
+  props: {
+    modelValue: {
+      type: Object,
+      default: {
+          cardNumber: '',
+          cardHolder: '',
+          expired: '',
+          cvv: '',
+          agree: false
+        }
+      }
+  }
 })
 </script>
 

@@ -31,22 +31,21 @@
               <div class="email__input">
                 <label class="form-input__label email-text">Email Address</label>
                 <img class="form-input__img" src="../assets/mail-icon.svg" alt="">
-                <input class="form-input" type="email" name="email" id="">
+                <input class="form-input" type="email" name="email" v-model="checkout.email">
               </div>
             </div>
-            <EmailFormInput v-model="email"/>
-            <PhoneFormInput />
+            <PhoneFormInput v-model="checkout.phone"/>
           </div>
           <div class="shipping__address">
             <h3 class="shipping__address-text">Shipping Address</h3>
           </div>
-          <AddressForm />
+          <AddressForm v-model="checkout.shippingAddress" :countries="countries"/>
           <div class="shipping__method">
             <h3 class="shipping__method-text">Shipping method</h3>
             <div class="check-shipping__method">
               <div class="dhl-shipping-price">
-                <RadioButton v-model="shippingPrice" radio-id="free-shipping" group-name="shipping-method" value="1" label="Free shipping"/>
-                <RadioButton v-model="shippingPrice" radio-id="dhl-shipping" group-name="shipping-method" value="2" label="DHL with price"/>
+                <RadioButton v-model="checkout.shippingMethod" radio-id="free-shipping" group-name="shipping-method" value="1" label="Free shipping"/>
+                <RadioButton v-model="checkout.shippingMethod" radio-id="dhl-shipping" group-name="shipping-method" value="2" label="DHL with price"/>
               </div>    
               <div class="shipping__cost">
                   <span class="shipping__method-price">$0</span>
@@ -58,18 +57,18 @@
             <h3 class="payment-text">Payment Method</h3>
             <span>All transaction are secured and encryted</span>
           </div>
-          <CardPaymentMethodForm />
+          <CardPaymentMethodForm v-model="checkout.paymentMethod" />
           <div class="billing__address">
             <h3 class="billing-text">Billing Address</h3>
             <span>Specify the address for your payment option</span>
 
             <div class="check-billing__address">   
-              <RadioButton v-model="billingAddress" radio-id="same-shipping" group-name="billing-address" value="1" label="Same as shipping address"/>
-              <RadioButton v-model="billingAddress" radio-id="diff-shipping" group-name="billing-address" value="2" label="Use a different billing address"/>
+              <RadioButton v-model="checkout.billingAddressType" radio-id="same-shipping" group-name="billing-address" value="1" label="Same as shipping address"/>
+              <RadioButton v-model="checkout.billingAddressType" radio-id="diff-shipping" group-name="billing-address" value="2" label="Use a different billing address"/>
             </div>
           </div>
-          <AddressForm />
-          <button class="complete__order" disabled="disabled" type="buttom">Complete Order
+          <AddressForm v-if="checkout.billingAddressType == 2" v-model="checkout.billingAddress" :countries="countries" />
+          <button class="complete__order" disabled="disabled" type="button">Complete Order
             <img class="img__arrow" src="../assets/Arrow-right.svg" alt="submit">
           </button>
         </div>
@@ -86,6 +85,7 @@
 <script>
   import { defineComponent } from 'vue';
   import { useQuasar } from 'quasar';
+  import Constants from '../common/Constants'
   import CountDown from 'src/components/CountDown.vue';
   import AddressForm from 'src/components/AddressForm.vue';
   import CardPaymentMethodForm from 'src/components/CardPaymentMethodForm.vue';
@@ -94,33 +94,57 @@
   import SafePaymentSSL from 'src/components/SafePaymentSSL.vue';
   import JewelleryClub from 'src/components/JewelleryClub.vue'
   import RadioButton from 'src/components/RadioButton.vue'
-  import EmailFormInput from 'src/components/EmailFormInput.vue'
   import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
   import PhoneFormInput from 'src/components/PhoneFormInput.vue';
 
   export default defineComponent({
     name: 'PageCheckout',
     components: {
-    CountDown,
-    ExpressCheckout,
-    AddressForm,
-    CardPaymentMethodForm,
-    OrderDetails,
-    SafePaymentSSL,
-    JewelleryClub,
-    RadioButton,
-    EmailFormInput,
-    OrderDetailsCollapseable,
-    PhoneFormInput
-},
+      CountDown,
+      ExpressCheckout,
+      AddressForm,
+      CardPaymentMethodForm,
+      OrderDetails,
+      SafePaymentSSL,
+      JewelleryClub,
+      RadioButton,
+      OrderDetailsCollapseable,
+      PhoneFormInput
+  },
     data (){
     return {
         mobile: false,
         showOrder: false,
         showCart: true,
-        shippingPrice: 1,
-        billingAddress: 1,
-        email: ''
+        email: '',
+        checkout: {
+          email: '',
+          phoneNumber: '',
+          shippingAddress: {
+            countryId: null,
+            firstName: '',
+            lastName: '',
+            address: '',
+            city: '',
+            postalCode: ''
+          },
+          shippingMethod: 1,
+          paymentMethod: {
+            cardNumber: '',
+            cardHolder: '',
+            expired: '',
+            cvv: '',
+            agree: false
+          },
+          billingAddressType: 1,
+          billingAddress: {
+            countryId: null,
+            firstName: '',
+            lastName: '',
+            city: '',
+            postalCode: ''
+          }
+        }
       }
     },
     computed: {
@@ -129,13 +153,11 @@
       },
       isTableOrMobile(){
         return this.$platform.is.tablet || this.$platform.is.mobile;
+      },
+      countries() {
+        return Constants.countries.map((c, i) => ({ id: i, name: c }));
       }
     },
-    methods: {
-    created(){
-      this.$on('update:modelValue', (data) => { shippingPrice = data; })
-    }
-  },
      created(){
       const $q = useQuasar()
       this.$platform = $q.platform;

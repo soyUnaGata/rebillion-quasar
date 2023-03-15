@@ -3,9 +3,9 @@
       <div class="regestration-form__rows shipping__address__select">
             <div class="form-input__wrapper w-100 country__select">
               <img class="select__arrow" src="../assets/select-country.svg" alt="" srcset="">
-              <select class="form-input country__select-wrapper" name="Country" id="country">
+              <select class="form-input country__select-wrapper" name="Country" id="country" v-model="modelValue.countryId">
                 <option disabled="disabled" selected="selected" class="country-headline">Country</option>
-                <option>Option 1</option>
+                <option v-for="country in countries" :value="country.id" v-text="country.name"></option>
               </select>
               <img class="form-input__img" src="../assets/location.svg" alt="">
             </div>
@@ -15,27 +15,27 @@
         <div class="form-input__wrapper w-50-with-gap">
           <label class="form-input__label">First name</label>
           <img class="form-input__img" src="../assets/user.svg" alt="user-icon">
-          <input class="form-input" type="text" name="name" id="name">
-          
+          <input class="form-input" type="text" name="name" id="name" v-model="modelValue.firstName">
+          <span class="form-error-message">Enter a first name</span>
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
             <label class="form-input__label">Last name</label>
-            <input class="form-input" type="text" name="last-name" id="last-name">
+            <input class="form-input" type="text" name="last-name" id="last-name" v-model="modelValue.lastName">
             <img class="form-input__img" src="../assets/user.svg" alt="user-icon">
         </div>
 
         <div class="form-input__wrapper w-100">
-          <input class="form-input" type="text" name="adress" id="adress" placeholder="Address">
+          <input class="form-input" type="text" name="adress" id="adress" placeholder="Address" v-model="modelValue.address" >
           <img class="form-input__img" src="../assets/home-location.svg" alt="home-location">
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
-          <input class="form-input details" type="text" name="city" id="city" placeholder="City">
+          <input class="form-input details" type="text" name="city" id="city" placeholder="City" v-model="modelValue.city">
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
-            <input class="form-input details" type="text" name="postal-code" id="postal-code" placeholder="Postal Code">
+            <input class="form-input details" type="text" name="postal-code" id="postal-code" placeholder="Postal Code" v-model="modelValue.postalCode">
         </div>
 
       </div>     
@@ -46,8 +46,25 @@
 <script>
 import { defineComponent } from 'vue'
 
+
 export default defineComponent({
-  name: 'AddressForm'
+  name: 'AddressForm',
+  props: {
+    modelValue: {
+      type: Object,
+      default: {
+        countryId: null,
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        postalCode: ''
+      } 
+    },
+    countries: {
+      type: Array
+    }
+  }
 })
 </script>
 
@@ -71,6 +88,20 @@ export default defineComponent({
 }
 .shipping__address__select{
   padding-top: 20px;
+}
+
+
+.form-error-message{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+
+  /* Status/danger */
+
+  color: #F53D6B;
 }
 
 </style>
