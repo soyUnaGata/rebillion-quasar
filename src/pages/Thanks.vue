@@ -1,7 +1,10 @@
 <template>
   <div class="thank-you-page__wrapper">
     <div class="row">
-      <div class="col-12 col-md-6 thanks-part">  
+      <div class="col-12 col-md-6 thanks-part"> 
+        <div class="isMobile" >
+              <OrderDetailsCollapseable v-if="isTableOrMobile" />
+            </div> 
           <div class="thanks-part-inner-wrapper">
             <div class="thanks__for__order">
               <img src="../assets/like.png" alt="">
@@ -49,10 +52,9 @@
             </div>
           </div>
         </div>
-      <div class="col-12 col-md-6 cart-2">
+      <div class="col-12 col-md-6 cart-2" v-if="isDesktop">
         <div class="cart__wrapper">
-          <OrderDetails/>
-          <SafePaymentSSL/>
+          <OrderDetailsCollapseable/>
         </div>
       </div>
     </div>
@@ -61,17 +63,28 @@
 </template>
   
 <script>
-import OrderDetails from 'src/components/OrderDetails.vue';
-import SafePaymentSSL from 'src/components/SafePaymentSSL.vue'
 import { defineComponent } from 'vue';
-  
+import { useQuasar } from 'quasar';
+import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
   
   export default defineComponent({
     name: "PageThanks",
     components: { 
-      OrderDetails,
-      SafePaymentSSL
+      OrderDetailsCollapseable
+    },
+    computed: {
+      isDesktop() {
+        return this.$platform.is.desktop;
+      },
+      isTableOrMobile() {
+        return this.$platform.is.tablet || this.$platform.is.mobile;
+      }
+    },
+    created() {
+      const $q = useQuasar()
+      this.$platform = $q.platform;
     }
+
 })
 </script>
 
@@ -192,4 +205,74 @@ import { defineComponent } from 'vue';
     display: flex;
     flex-direction: column;
   }
+.cart__contents-section::after{
+  content: '';
+  height: 1px;
+  background: #D6D8EE;
+  width: 100%;
+}
+</style>
+
+<style scoped>
+@media screen and (max-width: 576px) {
+  .isMobile {
+    width: 100%;
+  }
+  .show__order-mobile{
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .show__order{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .thanks-part{
+    padding: 30px 16px !important;
+  }
+  .cart__contents-section{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .thanks-part-inner-wrapper{
+    margin-top: 30px;
+  }
+  .complete__order{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .cart__wrapper{
+    background-color: #ffff;
+  }
+  .cart__contents-section--wrapper{
+    margin-top: 8px;
+    padding: 20px 16px;
+    background-color: var(--bg--cart);
+    border-top: 1px solid #EBECF3;
+    border-radius: 20px;
+  }
+  .jewellery__club-about{
+    padding: 20px 16px;
+  }
+  .btn__back-to-shop{
+    width: 100%;
+  }
+  .back{
+    min-width: 100% !important;
+    justify-content: center;
+  }
+  .personal__information{
+    margin-top: 30px !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+}
+ 
 </style>
