@@ -27,13 +27,13 @@
           <div class="contanct__info">
             <h3 class="contact__info-text">Contact Information</h3>
 
-            <div class="form-input__wrapper w-100 email__address__input" :class="{ 'form-control--invalid': v$?.checkout.email.$invalid }">
+            <div class="form-input__wrapper w-100 email__address__input" :class="{ 'form-control--invalid': v$?.checkout.email.$invalid }"> 
               <div class="email__input">
                 <label class="form-input__label email-text">Email Address</label>
                 <img class="form-input__img" src="../assets/mail-icon.svg" alt="">
                 <input class="form-input" type="email" name="email" v-model="checkout.email">
               </div>
-              <span class="form-error-message">Enter a email address</span>
+              <span class="form-error-message">Enter a email address</span> 
             </div>
             <PhoneFormInput v-model="checkout.phone"/>
           </div>
@@ -86,6 +86,8 @@
 <script>
   import { defineComponent } from 'vue';
   import { useQuasar } from 'quasar';
+  import { useVuelidate } from '@vuelidate/core' 
+  import { email, required } from '@vuelidate/validators' 
   import Constants from '../common/Constants'
   import CountDown from 'src/components/CountDown.vue';
   import AddressForm from 'src/components/AddressForm.vue';
@@ -97,9 +99,6 @@
   import RadioButton from 'src/components/RadioButton.vue'
   import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
   import PhoneFormInput from 'src/components/PhoneFormInput.vue';
-
-  import { useVuelidate } from '@vuelidate/core'
-  import { email, required } from '@vuelidate/validators'
 
   export default defineComponent({
     name: 'PageCheckout',
@@ -115,7 +114,7 @@
         OrderDetailsCollapseable,
         PhoneFormInput
     },
-    setup: () => ({ v$: useVuelidate() }),
+    setup: () => ({ v$: useVuelidate() }), 
     data() {
         return {
             mobile: false,
@@ -151,11 +150,11 @@
             }
         }
     },
-    validations: {
+    validations: { 
         checkout: {
             email: {
                 required,
-                email
+                email,
             }
         }
     },
