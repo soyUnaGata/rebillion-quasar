@@ -72,6 +72,7 @@
           <button class="complete__order" disabled="disabled" type="button">Complete Order
             <img class="img__arrow" src="../assets/Arrow-right.svg" alt="submit">
           </button>
+          <SafePaymentSSL v-if="isTableOrMobile"/>
         </div>
       </div>
       <div class="col-12 col-md-6 cart">
@@ -487,6 +488,9 @@ h2{
     }
     .jewellery__club-about{
       padding: 20px 16px;
+    }
+    .safe__payment-about{
+      margin-top: 30px !important;
     }
 
   }

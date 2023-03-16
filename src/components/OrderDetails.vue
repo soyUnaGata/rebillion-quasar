@@ -61,7 +61,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style >
 
 
 .cart__contents-section::after{

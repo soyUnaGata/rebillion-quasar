@@ -104,8 +104,13 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
+<style>
+.cart__contents-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
 
 .cart__contents-section::after{
   content: '';

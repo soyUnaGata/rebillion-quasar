@@ -367,5 +367,11 @@
     width: 100% !important;
     justify-content: center;
   }
+  .support__security__section{
+    max-width: 100% !important;
+  }
+  .secure__section{
+    padding: 16px 20px !important;
+  }
 }
 </style>
