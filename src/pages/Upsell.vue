@@ -52,7 +52,7 @@
           <img src="../assets/secure-section-img-6.png" alt="">
         </div>
       </div>
-      <div class="support__section">
+      <div class="support__section" v-if="isDesktop">
         <div class="support-about">
           <img src="../assets/support-person.svg" alt="">
           <div class="support-text">
@@ -78,9 +78,22 @@
   
 <script>
   import { defineComponent } from 'vue';
-  
+  import { useQuasar } from 'quasar';
+
   export default defineComponent({
-    name: 'PageUpsell'
+    name: 'PageUpsell',
+    computed: {
+        isDesktop() {
+            return this.$platform.is.desktop;
+        },
+        isTableOrMobile() {
+            return this.$platform.is.tablet || this.$platform.is.mobile;
+        },
+      },
+      created() {
+        const $q = useQuasar()
+        this.$platform = $q.platform;
+      }
   })
 </script>
 
@@ -90,8 +103,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 790px;
+    /* max-width: 790px; */
     margin: 0 auto;
+    max-width: 100%;
   }
   .cart-item-slider{
     position: relative;
@@ -128,9 +142,9 @@
     border: 1px solid #DADDF5;
     box-shadow: 0px 10px 30px rgba(22, 8, 49, 0.05);
     border-radius: 16px;
-    height: 225px;
     width: 790px;
     max-width: 100%;
+    padding: 40px 125px;
   }
   .price__and__discount{
     padding-top: 40px;
@@ -162,9 +176,7 @@
     line-height: 30px;
   }
   .quantity-item__count{
-    margin-top: 20px;
-    margin-left: 125px;
-    margin-right: 125px;
+    margin-top: 25px;
     background-color:rgba(239, 240, 245, 0.5);
     border-radius: 16px;
     height: 80px;
@@ -190,8 +202,6 @@
     cursor: pointer;
     font-size: 25px;
     border: none;
-    width: 57px;
-    height: 50px;
     line-height: 20px;
     font-weight: 400;
     color: var(--primary--dark);
@@ -210,6 +220,7 @@
   }
   .description__section{
     margin-top: 40px;
+    width: 790px;
   }
   .title__description{
     font-weight: 500;
@@ -314,4 +325,47 @@
     color: #4B4E68;
     cursor: pointer;
   }
+</style>
+
+<style>
+@media screen and (max-width: 576px){
+  .page__wrapper{
+    padding: 30px 16px !important;
+    max-width: 100%;
+  }
+  .cart-item-slider{
+    max-width: 100%;
+  }
+  .cart-item-img__middle{
+    max-width: 100%;
+  }
+  .quantity-item__wrapper{
+    padding: 40px 16px !important;
+    max-width: 100%;
+  }
+  .quantity-text {
+    padding: 15px 20px;
+  }
+  .description__section{
+    max-width: 100%;
+  }
+  .support__security__section{
+    margin-top: 30px;
+  }
+  .submit__purchase-btn{
+    margin-top: 30px !important;
+    width: 100% !important;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: unset;
+  }
+  .submit__purchase{
+    min-width: 100%;
+  }
+  .purchase {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
 </style>
