@@ -12,17 +12,18 @@
       </div>
 
       <div class="regestration-form__rows about__person">
-        <div class="form-input__wrapper w-50-with-gap">
+        <div class="form-input__wrapper w-50-with-gap" :class="{ 'form-control--invalid': v$?.modelValue.firstName.$invalid }">
           <label class="form-input__label">First name</label>
           <img class="form-input__img" src="../assets/user.svg" alt="user-icon">
           <input class="form-input" type="text" name="name" id="name" v-model="modelValue.firstName">
           <span class="form-error-message">Enter a first name</span>
         </div>
 
-        <div class="form-input__wrapper w-50-with-gap">
+        <div class="form-input__wrapper w-50-with-gap" :class="{ 'form-control--invalid': v$?.modelValue.lastName.$invalid }">
             <label class="form-input__label">Last name</label>
             <input class="form-input" type="text" name="last-name" id="last-name" v-model="modelValue.lastName">
             <img class="form-input__img" src="../assets/user.svg" alt="user-icon">
+            <span class="form-error-message">Enter a last name</span>
         </div>
 
         <div class="form-input__wrapper w-100">
@@ -45,7 +46,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-
+import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 export default defineComponent({
   name: 'AddressForm',
@@ -63,6 +65,13 @@ export default defineComponent({
     },
     countries: {
       type: Array
+    }
+  },
+  setup: () => ({ v$: useVuelidate() }),
+  validations:{
+    modelValue: {
+      firstName: { required },
+      lastName: { required }
     }
   }
 })

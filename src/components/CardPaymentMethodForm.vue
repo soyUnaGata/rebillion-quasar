@@ -1,10 +1,11 @@
 <template>
         <div class="payment__form card__holder-name">
       <div class="payment__form__rows">
-        <div class="form-input__wrapper w-100">
+        <div class="form-input__wrapper w-100" :class="{ 'form-control--invalid': v$?.modelValue.cardNumber.$invalid }">
           <label class="form-input__label" for="card">Card Number</label>
           <input class="form-input" type="text" name="card" id="card" v-model="modelValue.cardNumber">
           <img  class="form-input__img" src="../assets/payment.svg" alt="card">
+          <span class="form-error-message">Enter valid card number </span>
         </div>
 
         <div class="form-input__wrapper w-100">
@@ -17,7 +18,7 @@
         </div>
 
         <div class="form-input__wrapper w-50-with-gap">
-            <input class="form-input details" type="text" name="cvv" id="cvv" placeholder="CVV" v-model="modelValue.cvv">
+            <input class="form-input details" type="password" name="cvv" id="cvv" placeholder="CVV" v-model="modelValue.cvv">
         </div>
       </div>
 
@@ -34,7 +35,11 @@
 
 <script>
 import { defineComponent } from 'vue'
-
+import { useVuelidate } from '@vuelidate/core' 
+import {  required } from '@vuelidate/validators' 
+import { numeric } from '@vuelidate/validators'
+import { maxLength } from '@vuelidate/validators'
+import { minLength } from '@vuelidate/validators'
 
 export default defineComponent({
   name: 'CardPaymentMethodForm',
@@ -42,13 +47,24 @@ export default defineComponent({
     modelValue: {
       type: Object,
       default: {
-          cardNumber: '',
+          cardNumber: null,
           cardHolder: '',
           expired: '',
           cvv: '',
           agree: false
         }
       }
+  },
+  setup: () => ({ v$: useVuelidate() }), 
+  validations:{
+    modelValue:{
+      cardNumber: {
+        required,
+        numeric,
+        maxLength: maxLength(16),
+        minLength: minLength(16)
+      }
+    }
   }
 })
 </script>

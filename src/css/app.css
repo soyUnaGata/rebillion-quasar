@@ -117,16 +117,15 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 18px;
-    /* identical to box height */
-  
-  
-    /* Status/danger */
-  
     color: #F53D6B;
     display: none;
-  }
+}
 
-  .form-control--invalid .form-error-message{
+.form-control--invalid .form-error-message{
     display: inline;
-  }
+}
+.form-control--invalid{
+    border: 1.5px solid #F53D6B;
+    margin-bottom: 20px;
+}
   
