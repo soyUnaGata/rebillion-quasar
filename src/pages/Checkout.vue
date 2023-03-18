@@ -27,15 +27,18 @@
           <div class="contanct__info">
             <h3 class="contact__info-text">Contact Information</h3>
 
-            <div class="form-input__wrapper w-100 email__address__input" :class="{ 'form-control--invalid': v$?.checkout.email.$invalid }"> 
-              <div class="email__input">
-                <label class="form-input__label email-text">Email Address</label>
-                <img class="form-input__img" src="../assets/mail-icon.svg" alt="">
-                <input class="form-input" type="email" name="email" v-model="checkout.email">
-              </div>
-              <span class="form-error-message">Enter a email address</span> 
+            <div class="regestration-form__rows">
+                <div class="form-input__wrapper w-100" :class="{ 'form-control--invalid': v$?.checkout.email.$invalid }"> 
+                  <div class="email__input">
+                    <label class="form-input__label email-text">Email Address</label>
+                    <img class="form-input__img" src="../assets/mail-icon.svg" alt="">
+                    <input class="form-input" type="email" name="email" v-model="checkout.email">
+                  </div>
+                  <span class="form-error-message">Enter a email address</span> 
+                </div>
+                <PhoneFormInput v-model="checkout.phoneNumber"/>
             </div>
-            <PhoneFormInput v-model="checkout.phone"/>
+
           </div>
           <div class="shipping__address">
             <h3 class="shipping__address-text">Shipping Address</h3>
@@ -195,7 +198,7 @@
             }));
         },
         isInvalid(){
-          return this.v$.checkout.$invalid;
+          return this.v$.checkout.$invalid || !this.checkout.paymentMethod.agree;
         }
     },
     methods:{
@@ -320,6 +323,7 @@ h2{
   font-size: 24px;
   line-height: 34px;
   color: var(--primary--dark);
+  margin-bottom: 20px;
 }
 .email__address__input{
   margin-top: 29px;

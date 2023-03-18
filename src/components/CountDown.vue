@@ -9,7 +9,7 @@
       <p class="divide-dots">:</p>
       <p class="hms minutes">{{ minutes.toString().padStart(2, '0') }}</p>
       <p class="divide-dots separator">:</p>
-      <p class="hms seconds" :class="{'blink': blink}">{{ seconds.toString().padStart(2, '0') }}</p>
+      <p class="hms seconds blink">{{ seconds.toString().padStart(2, '0') }}</p>
     </div>
   </div>
 </template>
@@ -21,29 +21,33 @@ export default defineComponent({
   name: 'CountDown',
   data(){
     return {
-      minutes: 10,
+      minutes: 1,
       seconds: 0,
-      timer: null,
-      blink: false
+      timer: null
+    }
+  },
+  methods:{
+    tick(){
+      if (this.seconds > 0) {
+        this.seconds--;
+        return;
+      } 
+      
+      if (this.minutes > 0) {
+        this.minutes--;
+        this.seconds = 59;
+        return;
+      }
+
+      clearInterval(this.timer);
+      alert('Time is up!');
     }
   },
   created() {
-    this.timer = setInterval(() => {
-      if (this.seconds > 0) {
-        this.seconds--;
-      } else {
-        if (this.minutes > 0) {
-          this.minutes--;
-          this.seconds = 59;
-        } else {
-          clearInterval(this.timer);
-          if (document.visibilityState === 'visible') {
-            alert('Time is up!');
-          }
-        }
-      }
-      this.blink = !this.blink;
-    }, 1000);
+    this.timer = setInterval(this.tick, 1000);
+  },
+  unmounted(){
+    clearInterval(this.timer);
   }
 });
 </script>

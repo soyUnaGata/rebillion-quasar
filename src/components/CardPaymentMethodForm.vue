@@ -58,8 +58,8 @@ export default defineComponent({
       cardNumber: {
         required,
         numeric,
-        maxLength: maxLength(16),
-        minLength: minLength(16)
+        minLength: minLength(16),
+        maxLength: maxLength(16)
       }
     }
   }
