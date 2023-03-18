@@ -37,7 +37,9 @@ export default defineComponent({
           this.seconds = 59;
         } else {
           clearInterval(this.timer);
-          alert('Time is up!');
+          if (document.visibilityState === 'visible') {
+            alert('Time is up!');
+          }
         }
       }
       this.blink = !this.blink;

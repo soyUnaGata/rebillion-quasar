@@ -69,7 +69,7 @@
             </div>
           </div>
           <AddressForm v-if="checkout.billingAddressType == 2" v-model="checkout.billingAddress" :countries="countries" />
-          <button class="complete__order" disabled="disabled" type="button">Complete Order
+          <button class="complete__order" :disabled="isInvalid" type="button" @click="submit">Complete Order
             <img class="img__arrow" src="../assets/Arrow-right.svg" alt="submit">
           </button>
           <SafePaymentSSL v-if="isTableOrMobile"/>
@@ -88,7 +88,8 @@
   import { defineComponent } from 'vue';
   import { useQuasar } from 'quasar';
   import { useVuelidate } from '@vuelidate/core' 
-  import { email, required } from '@vuelidate/validators' 
+  import { required, requiredIf, email, numeric, minLength, maxLength } from '@vuelidate/validators' 
+ 
   import Constants from '../common/Constants'
   import CountDown from 'src/components/CountDown.vue';
   import AddressForm from 'src/components/AddressForm.vue';
@@ -100,6 +101,11 @@
   import RadioButton from 'src/components/RadioButton.vue'
   import OrderDetailsCollapseable from 'src/components/OrderDetailsCollapseable.vue'
   import PhoneFormInput from 'src/components/PhoneFormInput.vue';
+
+  const requiredIfBillingAddressTypeIsNotSame = (value, siblings, vm) => {
+    const invalidValue = !value || value === ' ';
+    return vm.checkout.billingAddressType == 1 || !invalidValue;
+  }
 
   export default defineComponent({
     name: 'PageCheckout',
@@ -156,6 +162,22 @@
             email: {
                 required,
                 email,
+            },
+            shippingAddress: {
+              firstName: { required },
+              lastName: { required }
+            },
+            paymentMethod: {
+              cardNumber: {
+                required,
+                numeric,
+                maxLength: maxLength(16),
+                minLength: minLength(16)
+              }
+            },
+            billingAddress: {
+              firstName: { requiredIfBillingAddressTypeIsNotSame },
+              lastName: { requiredIfBillingAddressTypeIsNotSame }
             }
         }
     },
@@ -171,7 +193,18 @@
                 id: i,
                 name: c
             }));
+        },
+        isInvalid(){
+          return this.v$.checkout.$invalid;
         }
+    },
+    methods:{
+      submit(){
+        if(this.isInvalid) return;
+
+        //send request, if success then:
+        this.$router.push('/upsell');
+      }
     },
     created() {
         const $q = useQuasar()

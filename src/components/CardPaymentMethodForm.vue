@@ -36,10 +36,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useVuelidate } from '@vuelidate/core' 
-import {  required } from '@vuelidate/validators' 
-import { numeric } from '@vuelidate/validators'
-import { maxLength } from '@vuelidate/validators'
-import { minLength } from '@vuelidate/validators'
+import { required, numeric, minLength, maxLength } from '@vuelidate/validators' 
 
 export default defineComponent({
   name: 'CardPaymentMethodForm',

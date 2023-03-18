@@ -64,13 +64,13 @@
     </div>
     <div class="submit__purchase-btn">
       <div class="submit__purchase">
-        <button class="purchase" type="button">
+        <button class="purchase" type="button" @click="submit">
           Yes, I want
           <img src="../assets/Arrow-right.svg" alt="">
         </button>
       </div>
       <div class="reject__purchase">
-        <span>No, Thanks</span>
+        <router-link :to="'/thank-you'"><span>No, Thanks</span></router-link>
       </div>
     </div>
   </div>
@@ -93,7 +93,12 @@
       created() {
         const $q = useQuasar()
         this.$platform = $q.platform;
+      },
+      methods:{
+      submit(){
+        this.$router.push('/thank-you');
       }
+    },
   })
 </script>
 
@@ -324,6 +329,11 @@
     line-height: 24px;
     color: #4B4E68;
     cursor: pointer;
+    text-decoration: none;
+  }
+  .reject__purchase > a{
+    text-decoration: none;
+    color: #4B4E68;
   }
 </style>
 
