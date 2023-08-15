@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'CountDown',
   data(){
     return {
-      minutes: 1,
+      minutes: 10,
       seconds: 0,
       timer: null
     }
@@ -44,7 +44,7 @@ export default defineComponent({
     }
   },
   created() {
-    this.timer = setInterval(this.tick, 600000);
+    this.timer = setInterval(this.tick, 1000);
   },
   unmounted(){
     clearInterval(this.timer);
