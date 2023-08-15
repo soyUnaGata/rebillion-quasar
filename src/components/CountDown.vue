@@ -44,7 +44,7 @@ export default defineComponent({
     }
   },
   created() {
-    this.timer = setInterval(this.tick, 1000);
+    this.timer = setInterval(this.tick, 600000);
   },
   unmounted(){
     clearInterval(this.timer);
